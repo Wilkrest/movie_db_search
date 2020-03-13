@@ -4,19 +4,23 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-
-      <table>
+      
+      <table className='title-bar'>
         <tbody>
           <tr>
             <td>
-              <img width ="50" alt="movie logo" src="movie-logo.svg"/>
+              <img width ="50" alt="movie logo" src="logo.svg"/>
             </td>
+            <td width='8'></td>
             <td>
-              MoviesDB Search
+              <h1>  MoviesDB Search </h1>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <input className="main-search-bar" placeholder="Enter movie title..."></input>
+
     </div>
 
   );
