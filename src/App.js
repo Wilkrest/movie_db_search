@@ -1,27 +1,26 @@
 import React from 'react';
 import './App.css';
-import MovieRow from './MovieRow.js'
+import MovieRow from './MovieRow.js';
 //dollar sign represents the jquery library
-import $ from 'jquery'
+import $ from 'jquery';
 
 class App extends React.Component 
 {
-
   //constructor for this component
   constructor(props)
   {
-    super(props)
+    super(props);
     //initialize state to an empty state
-    this.state = {}
+    this.state = {};
     //perform the search 
-    this.performSearch("")
+    this.performSearch("");
   }
 
   //this function executes the search on movieDB and returns the results
   performSearch(searchTerm) 
   {
     //jquery has a function called ajax used to make asynchronous calls to fetch data
-    const urlString = "https://api.themoviedb.org/3/search/movie?api_key=98350ecd42c9cc6f0c3ca343d790f8e9&query=" + searchTerm
+    const urlString = "https://api.themoviedb.org/3/search/movie?api_key=98350ecd42c9cc6f0c3ca343d790f8e9&query=" + searchTerm;
     $.ajax({
       //holds the url to fetch data from 
       url: urlString,
@@ -29,24 +28,20 @@ class App extends React.Component
       //searchResults is the fetched data, which should be in the form of an array of JSON objects
       success: (searchResults) => 
       {
-        console.log("fetched data successfully")
-
         //save the fetched data into results, results will now be an array of objects
-        const results = searchResults.results
+        const results = searchResults.results;
         //initalize array to contain the constructed movie row components
-        const movieRows = []
+        const movieRows = [];
 
         //parse through the fetched JSON array building MovieRow components with each element in the fetched array
         results.forEach((movie) => 
         {
           //construct the new MovieRow component with each 'movie' in the results array
-          const newMovie = <MovieRow key={movie.id} movie={movie} />
-          movieRows.push(newMovie)
+          const newMovie = <MovieRow key={movie.id} movie={movie} />;
+          movieRows.push(newMovie);
         })
-        
         //set the current state
-        this.setState({rows: movieRows})
-
+        this.setState({rows: movieRows});
       },
       //callback function excecuted on error
       error: (xhr, status, err) => {
@@ -58,11 +53,10 @@ class App extends React.Component
 
   searchHandler(event) 
   {
-    const searchTerm = event.target.value
-    this.performSearch(searchTerm)
+    const searchTerm = event.target.value;
+    this.performSearch(searchTerm);
     
   }
-
 
   render() 
   {
